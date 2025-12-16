@@ -6,20 +6,22 @@
 [🥇币安Binanc交易所](https://accounts.maxweb.red/zh-CN/register?ref=10973272)  
 [🥈BIT bit.com交易所](https://www.bitexch.io/zh-CN/signup?code=NSXCMK)    
 ------
-## 👯 **常用矿池** ...  
-[🥇微比特VIABTC](https://www.viabtc.com/signup?refer=1372178)       
-[🥇鱼池F2POOL](https://www.f2pool.com)   
-[🥈蚁池ANTPOOL](https://www.antpool.com)    
+## 👯 **常用矿池** ...     
+[🥇鱼池F2POOL](https://www.f2pool.com)  
+[🥇鱼池F2POOL线路](https://www.f2pool.com)  
+[🥈蚁池ANTPOOL](https://www.antpool.com)  
+[🥇微比特VIABTC](https://www.viabtc.com/signup?refer=1372178)    
 [🥈币印POOLIN](https://www.poolin.one)    
 ------  
-## 😄 **新手教程** ...    
+## 😄 **加密隧道** ...    
    
  
 
-[🥈点击查看](https://github.com/user-attachments/assets/46b48000-cb54-4673-af2b-42c544390e0e)    
+[🥈F2POOL](通过网盘分享的文件：f2pool
+链接: https://pan.baidu.com/s/19KzVAAvXy-ylPtaOasKquQ 提取码: xkrg)    
 
 
-------
+----
 ## 🤔 **批量工具**...  
 [🥇BTC批量工具](https://url.cloverpool.com/btc-tools-download)    
 [🥇蚂蚁ANT工具](https://url.cloverpool.com/btc-tools-download)    
