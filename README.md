@@ -17,8 +17,7 @@
    
  
 
-[🥈F2POOL](通过网盘分享的文件：f2pool
-链接: https://pan.baidu.com/s/19KzVAAvXy-ylPtaOasKquQ 提取码: xkrg)    
+[🥈F2POOL 提取码: xkrg](https://pan.baidu.com/s/19KzVAAvXy-ylPtaOasKquQ )    
 
 
 ----
