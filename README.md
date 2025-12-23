@@ -7,20 +7,11 @@
 [🥈BIT bit.com交易所](https://www.bitexch.io/zh-CN/signup?code=NSXCMK)    
 ------
 ## 👯 **常用矿池** ...     
-[🥇鱼池F2POOL](https://www.f2pool.com)  
-[🥇鱼池F2POOL线路](https://www.f2pool.com)  
+[🥇鱼池F2POOL](https://www.f2pool.com)    
 [🥈蚁池ANTPOOL](https://www.antpool.com)  
 [🥇微比特VIABTC](https://www.viabtc.com/signup?refer=1372178)    
 [🥈币印POOLIN](https://www.poolin.one)    
 ------  
-## 😄 **加密隧道** ...    
-   
- 
-
-[🥈F2POOL 提取码: xkrg](https://pan.baidu.com/s/19KzVAAvXy-ylPtaOasKquQ )    
-
-
-----
 ## 🤔 **批量工具**...  
 [🥇BTC批量工具](https://url.cloverpool.com/btc-tools-download)    
 [🥇蚂蚁ANT工具](https://url.cloverpool.com/btc-tools-download)    
@@ -28,7 +19,7 @@
 [🥇神马工具](https://aws-microbt-com-bucket.s3.us-west-2.amazonaws.com/1729849797620WhatsMinerTool-9.0.4.rar)   
 [🥇神马油冷工具](https://drive.google.com/file/d/1GvVKyF4EUxyIBfpXWp3sT3AE0yT4IJoA/view?pli=1)   
 [🥇elphapex管理工具](https://ruixin.s3.amazonaws.com/%2F2025/202509/20250906/R250906003492/ElphapexTool_1.0.1%2820250904%29_Release.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20251201T063602Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Credential=AKIAWBAYIK2JZQJ47E4D%2F20251201%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=c4e761a43fdae3b79753ddbc808d4a44d14ae9167b41e0ee977015cc1a338763)   
-
+## 😄 **新手指导** ...    
 -------
 ## 📫 **常见问题**...
 ------
