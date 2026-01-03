@@ -3,8 +3,7 @@
 ## 🌱 **交易所导航** ... 
 [🥉欧易Okex交易所](https://ouyin.cyou/)    
 [🥈芝麻开门Gate.io](https://www.gt-io.com/signup/UwIQUgw?ref_type=103)       
-[🥇币安Binanc交易所](http://maxweb.cyou)  
-[🥈BIT bit.com交易所](https://www.bitexch.io/zh-CN/signup?code=NSXCMK)    
+[🥇币安Binanc交易所](http://maxweb.cyou)   
 ------
 ## 👯 **常用矿池** ...     
 [🥇鱼池F2POOL](https://www.f2pool.com)    
