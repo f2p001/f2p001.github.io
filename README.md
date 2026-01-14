@@ -9,7 +9,7 @@
 [🥇鱼池F2POOL](https://www.f2pool.com)    
 [🥈蚁池ANTPOOL](https://www.antpool.com)  
 [🥇微比特VIABTC](https://www.viabtc.com/signup?refer=1372178)    
-[🥈币印POOLIN](https://www.poolin.one)    
+[🥈币印POOLIN](https://www.poolin.com)    
 ------  
 ## 🤔 **批量工具**...  
 [🥇BTC批量工具](https://url.cloverpool.com/btc-tools-download)    
