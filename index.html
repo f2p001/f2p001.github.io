@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BTC-Tools | 实时行情与运维工具箱</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --apple-bg: #f5f5f7;
+            --apple-text: #1d1d1f;
+            --apple-gray: #86868b;
+            --apple-blue: #0066cc;
+            --card-white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--apple-bg);
+            color: var(--apple-text);
+            line-height: 1.5;
+        }
+
+        /* --- 强制知情同意弹窗 --- */
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            display: flex; justify-content: center; align-items: center; z-index: 9999;
+        }
+        .modal {
+            background: #fff; width: 92%; max-width: 480px; border-radius: 28px;
+            padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.05);
+        }
+        .modal h2 { font-size: 24px; margin-bottom: 15px; letter-spacing: -0.5px; }
+        .modal p { font-size: 14px; color: var(--apple-gray); margin-bottom: 10px; line-height: 1.6; }
+        .btn-confirm {
+            width: 100%; background: var(--apple-text); color: #fff; border: none;
+            padding: 16px; border-radius: 14px; font-weight: 600; font-size: 16px;
+            cursor: pointer; margin-top: 20px; transition: all 0.3s;
+        }
+
+        /* --- 导航栏 --- */
+        nav {
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(20px);
+            position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .nav-content {
+            max-width: 1100px; margin: 0 auto; height: 52px;
+            display: flex; justify-content: space-between; align-items: center; padding: 0 20px;
+        }
+        .logo { font-weight: 700; font-size: 18px; letter-spacing: -0.5px; }
+
+        /* --- Hero 区域 --- */
+        .hero { padding: 60px 20px 30px; text-align: center; }
+        .hero h1 { font-size: clamp(32px, 8vw, 48px); font-weight: 700; letter-spacing: -1.5px; margin-bottom: 15px; }
+        .hero p { font-size: 18px; color: var(--apple-gray); max-width: 600px; margin: 0 auto; }
+
+        /* --- 内容容器 --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px 20px 80px; }
+        .section-title { font-size: 22px; font-weight: 700; margin: 30px 0 20px; padding-left: 5px; }
+        
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 20px; 
+        }
+        
+        .card {
+            background: var(--card-white); border-radius: 22px; padding: 24px;
+            display: flex; align-items: flex-start; gap: 18px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none; color: inherit; border: 1px solid transparent;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.06); border-color: var(--apple-blue); }
+
+        .icon-box {
+            width: 52px; height: 52px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; flex-shrink: 0; color: #fff;
+        }
+
+        .card-info h3 { font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+        
+        /* 价格行情显示 */
+        .price-row { 
+            display: flex; align-items: baseline; gap: 6px; margin: 8px 0;
+            font-family: 'JetBrains Mono', monospace; 
+        }
+        .price-val { font-size: 20px; font-weight: 700; color: var(--apple-text); }
+        .price-unit { font-size: 12px; color: var(--apple-gray); }
+
+        @keyframes flash-up { 0% { background-color: rgba(52, 199, 89, 0.1); } 100% { background-color: transparent; } }
+        .flash { animation: flash-up 0.8s ease-out; }
+
+        .tag-btn { 
+            display: inline-block; font-size: 12px; background: var(--apple-bg); 
+            color: var(--apple-blue); padding: 6px 12px; border-radius: 8px; 
+            font-weight: 600; margin-top: 10px; border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        /* --- 页脚 --- */
+        footer { background: #1d1d1f; color: #86868b; padding: 60px 20px; text-align: center; font-size: 13px; }
+        .footer-links { margin-bottom: 15px; }
+        .footer-links a { color: #fff; text-decoration: none; margin: 0 10px; opacity: 0.7; }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="overlay" id="userConsent">
+    <div class="modal">
+        <h2>用户告知书</h2>
+        <p>1. 本站仅提供实时行情展示及常用运维工具跳转链接。</p>
+        <p>2. <b>合规提醒：</b>请确保您在当地法律法规允许的范围内参与相关活动。</p>
+        <p>3. 使用本站服务即代表您同意自行承担所有相关法律风险与义务。</p>
+        <button class="btn-confirm" onclick="document.getElementById('userConsent').style.display='none'">确认并进入</button>
+    </div>
+</div>
+
+<nav>
+    <div class="nav-content">
+        <div class="logo">BTC-Tools</div>
+        <div id="status-tag" style="font-size: 10px; color: var(--apple-gray);">● 实时数据已同步</div>
+    </div>
+</nav>
+
+<header class="hero">
+    <h1>全球主流币种行情</h1>
+    <p>同步各大交易所数据，提供专业运维管理工具。</p>
+</header>
+
+<main class="container">
+    
+    <div class="section-title">实时市场价格</div>
+    <div class="grid">
+        <a href="https://accounts.bmwweb.solutions/zh-CN/register?ref=10973272" target="_blank" class="card" id="card-BTCUSDT">
+            <div class="icon-box" style="background: #F7931A;">₿</div>
+            <div class="card-info">
+                <h3>Bitcoin / BTC</h3>
+                <div class="price-row">
+                    <span id="price-BTCUSDT" class="price-val">读取中</span>
+                    <span class="price-unit">USDT</span>
+                </div>
+                <span class="tag-btn">前往币安注册 →</span>
+            </div>
+        </a>
+
+        <a href="https://www.djonwebb.systems/zh-hans/account/register?channelId=1835340" target="_blank" class="card" id="card-ETHUSDT">
+            <div class="icon-box" style="background: #627EEA;">Ξ</div>
+            <div class="card-info">
+                <h3>Ethereum / ETH</h3>
+                <div class="price-row">
+                    <span id="price-ETHUSDT" class="price-val">读取中</span>
+                    <span class="price-unit">USDT</span>
+                </div>
+                <span class="tag-btn">前往欧意注册 →</span>
+            </div>
+        </a>
+
+        <a href="https://www.gt-io.com/zh/signup?ref_type=103&ref=UwIQUgw" target="_blank" class="card" id="card-DOGEUSDT">
+            <div class="icon-box" style="background: #C2A633;">Ð</div>
+            <div class="card-info">
+                <h3>Dogecoin / DOGE</h3>
+                <div class="price-row">
+                    <span id="price-DOGEUSDT" class="price-val">读取中</span>
+                    <span class="price-unit">USDT</span>
+                </div>
+                <span class="tag-btn">前往芝麻注册 →</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="section-title">专业运维工具箱</div>
+    <div class="grid">
+        <a href="https://share.weiyun.com/ISSFPm5L" target="_blank" class="card">
+            <div class="icon-box" style="background: #1d1d1f;">⚙️</div>
+            <div class="card-info">
+                <h3>本地中转助手 (Windows)</h3>
+                <p style="font-size: 13px; color: var(--apple-gray); margin-top: 4px;">一键部署 TLS 加密隧道，优化算力连接稳定性。</p>
+                <span class="tag-btn" style="background: transparent;">立即下载工具</span>
+            </div>
+        </a>
+
+        <a href="https://btc-tools.org/release/BTC-Tools_v1.3.4-Win.zip" target="_blank" class="card">
+            <div class="icon-box" style="background: #5ac8fa;">📊</div>
+            <div class="card-info">
+                <h3>批量管理工具 (Pro)</h3>
+                <p style="font-size: 13px; color: var(--apple-gray); margin-top: 4px;">实时数据监控，支持多机型批量管理配置。</p>
+                <span class="tag-btn" style="background: transparent;">立即下载软件</span>
+            </div>
+        </a>
+    </div>
+
+</main>
+
+<footer>
+    <div class="footer-links">
+        <a href="#">关于我们</a> | <a href="#">免责声明</a> | <a href="mailto:nicepool.xyz@gmail.com">联系支持</a>
+    </div>
+    <p>&copy; 2026 BTC-Tools Global. 所有工具仅供技术参考。</p>
+</footer>
+
+<script>
+    const symbols = ["BTCUSDT", "ETHUSDT", "DOGEUSDT"];
+
+    async function fetchPrices() {
+        try {
+            const response = await fetch(`https://api.binance.com/api/v3/ticker/price?symbols=${JSON.stringify(symbols)}`);
+            const data = await response.json();
+
+            data.forEach(item => {
+                const priceEl = document.getElementById(`price-${item.symbol}`);
+                const cardEl = document.getElementById(`card-${item.symbol}`);
+                
+                let precision = item.symbol.includes('DOGE') ? 4 : 2;
+                const newPrice = parseFloat(item.price).toFixed(precision);
+                
+                if (priceEl.innerText !== newPrice) {
+                    priceEl.innerText = newPrice;
+                    cardEl.classList.add('flash');
+                    setTimeout(() => cardEl.classList.remove('flash'), 800);
+                }
+            });
+            document.getElementById('status-tag').innerText = "● 实时同步: " + new Date().toLocaleTimeString();
+        } catch (error) {
+            document.getElementById('status-tag').innerText = "○ 数据连接异常";
+        }
+    }
+
+    fetchPrices();
+    setInterval(fetchPrices, 5000);
+</script>
+
+</body>
+</html>
